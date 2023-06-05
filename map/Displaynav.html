@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost/basVI/map1.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Display navigation directions</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="./Displaynav_files/mapbox-gl.css" rel="stylesheet">
+<script src="./Displaynav_files/mapbox-gl.js.download"></script><style type="text/css" id="operaUserStyle"></style>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<script src="./Displaynav_files/mapbox-gl-directions.js.download"></script>
+<link rel="stylesheet" href="./Displaynav_files/mapbox-gl-directions.css" type="text/css">
+<div id="map" class="mapboxgl-map"><div class="mapboxgl-canary" style="visibility: hidden;"></div><div class="mapboxgl-canvas-container mapboxgl-interactive mapboxgl-touch-zoom-rotate mapboxgl-touch-drag-pan"><canvas class="mapboxgl-canvas" tabindex="0" aria-label="Map" role="region" width="1179" height="904" style="width: 1179px; height: 904px;"></canvas></div><div class="mapboxgl-control-container"><div class="mapboxgl-ctrl-top-left"><div class="mapboxgl-ctrl-directions mapboxgl-ctrl"><div class="directions-control directions-control-inputs"><div class="mapbox-directions-component mapbox-directions-inputs">
+  <div class="mapbox-directions-component-keyline">
+    <div class="mapbox-directions-origin">
+      <label class="mapbox-form-label">
+        <span class="directions-icon directions-icon-depart"></span>
+      </label>
+      <div id="mapbox-directions-origin-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" value="-17.83144,31.04797"><div class="suggestions-wrapper"><ul class="suggestions" style="display: none;"></ul></div><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close active"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
+    </div>
+
+    <button class="directions-icon directions-icon-reverse directions-reverse js-reverse-inputs" title="Reverse origin &amp; destination">
+    </button>
+
+    <div class="mapbox-directions-destination">
+      <label class="mapbox-form-label">
+        <span class="directions-icon directions-icon-arrive"></span>
+      </label>
+      <div id="mapbox-directions-destination-input"><div class="mapboxgl-ctrl-geocoder"><span class="geocoder-icon geocoder-icon-search"></span><input type="text" value="-18.01609,31.06755"><div class="suggestions-wrapper"><ul class="suggestions" style="display: none;"></ul></div><div class="geocoder-pin-right"><button class="geocoder-icon geocoder-icon-close"></button><span class="geocoder-icon geocoder-icon-loading"></span></div></div></div>
+    </div>
+  </div>
+
+  
+  <div class="mapbox-directions-profile mapbox-directions-component-keyline mapbox-directions-clearfix"><input id="mapbox-directions-profile-driving-traffic" type="radio" name="profile" value="mapbox/driving-traffic" checked="">
+    <label for="mapbox-directions-profile-driving-traffic">Traffic</label>
+    <input id="mapbox-directions-profile-driving" type="radio" name="profile" value="mapbox/driving">
+    <label for="mapbox-directions-profile-driving">Driving</label>
+    <input id="mapbox-directions-profile-walking" type="radio" name="profile" value="mapbox/walking">
+    <label for="mapbox-directions-profile-walking">Walking</label>
+    <input id="mapbox-directions-profile-cycling" type="radio" name="profile" value="mapbox/cycling">
+    <label for="mapbox-directions-profile-cycling">Cycling</label>
+  </div>
+  
+</div>
+</div><div class="directions-control directions-control-instructions"></div></div></div><div class="mapboxgl-ctrl-top-right"></div><div class="mapboxgl-ctrl-bottom-left"><div class="mapboxgl-ctrl" style="display: block;"><a class="mapboxgl-ctrl-logo" target="_blank" rel="noopener nofollow" href="https://www.mapbox.com/" aria-label="Mapbox logo"></a></div></div><div class="mapboxgl-ctrl-bottom-right"><div class="mapboxgl-ctrl mapboxgl-ctrl-attrib"><button class="mapboxgl-ctrl-attrib-button" type="button" aria-label="Toggle attribution"><span class="mapboxgl-ctrl-icon" aria-hidden="true" title="Toggle attribution"></span></button><div class="mapboxgl-ctrl-attrib-inner" role="list"><a href="https://www.mapbox.com/about/maps/" target="_blank" title="Mapbox" aria-label="Mapbox" role="listitem">© Mapbox</a> <a href="https://www.openstreetmap.org/about/" target="_blank" title="OpenStreetMap" aria-label="OpenStreetMap" role="listitem">© OpenStreetMap</a> <a class="mapbox-improve-map" href="https://apps.mapbox.com/feedback/?owner=mapbox&amp;id=streets-v12&amp;access_token=pk.eyJ1IjoibGVlcm95a3UiLCJhIjoiY2w1MTFhYzdrMDFiMzNrbXk1bHFucXNlayJ9.c61PVNZdqDVISnFcUrflFQ#/-79.4639/43.66804/13" target="_blank" aria-label="Map feedback" role="listitem" rel="noopener nofollow">Improve this map</a></div></div></div></div></div>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibGVlcm95a3UiLCJhIjoiY2w1MTFhYzdrMDFiMzNrbXk1bHFucXNlayJ9.c61PVNZdqDVISnFcUrflFQ';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+    });
+
+    map.addControl(
+        new MapboxDirections({
+            accessToken: mapboxgl.accessToken
+        }),
+        'top-left'
+    );
+</script>
+
+
+<iframe src="./Displaynav_files/globalstorage.html" style="position: absolute; width: 1px; height: 1px; left: -9999px;"></iframe></body></html>

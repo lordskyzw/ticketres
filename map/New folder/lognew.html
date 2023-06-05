@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f7f7f7;
+		}
+		form {
+			margin: 50px auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			background-color: #fff;
+			width: 300px;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 0;
+		}
+		input[type="text"], input[type="password"], input[type="email"], input[type="submit"] {
+			display: block;
+			margin: 10px auto;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+			font-size: 16px;
+			color: #444;
+		}
+		input[type="submit"] {
+			background-color: #1e90ff;
+			color: #fff;
+			cursor: pointer;
+		}
+		input[type="submit"]:hover {
+			background-color: #0077ff;
+		}
+		p.error {
+			color: red;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<?php
+		// Initialize variables
+		$username = $password = $email = '';
+		$errors = array();
+
+		// Check if the form was submitted
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			// Validate form inputs
+			if (empty($_POST['username'])) {
+				$errors[] = 'Username is required';
+			} else {
+				$username = trim($_POST['username']);
+			}
+			if (empty($_POST['password'])) {
+				$errors[] = 'Password is required';
+			} else {
+				$password = trim($_POST['password']);
+			}
+			if (empty($_POST['email'])) {
+				$errors[] = 'Email is required';
+			} else {
+				$email = trim($_POST['email']);
+				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					$errors[] = 'Invalid email format';
+				}
+			}
+
+			// If there are no errors, create a new user
+			if (empty($errors)) {
+				// Add your code here to create a new user in your database
+				echo '<p>New user created!</p>';
+			}
+		}
+	?>
+	<h1>Login</h1>
+	<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+		<input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>">
+		<input type="password" name="password" placeholder="Password" value="<?php echo htmlspecialchars($password); ?>">
+		<input type="submit" name="login" value="Login">
+	</form>
+	<h1>Sign Up</h1>
+	<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+		<input type="text" name="username" placeholder="Username" value="<?php echo htmlspecialchars($username); ?>">
+		<input type="password" name="password" placeholder="Password" value="<?php echo htmlspecialchars($password); ?>">
+		<input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>">
+		<input type="submit" name="signup" value="Sign Up">
+        
+        <?php
+	// If there are errors, display them
+	if (!empty($errors)) {
+		echo '<p class="error">' . implode('<br>', $errors) . '</p>';
+	}
+?>
+</form>
+</body>
+</html>
+

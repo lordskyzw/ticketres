@@ -1,0 +1,74 @@
+<html>
+<script>
+// The API Key provided is restricted to JSFiddle website
+// Get your own API Key on https://myprojects.geoapify.com
+var myAPIKey = "pk.eyJ1IjoibGVlcm95a3UiLCJhIjoiY2w1MTFhYzdrMDFiMzNrbXk1bHFucXNlayJ9.c61PVNZdqDVISnFcUrflFQ";
+
+var center = {
+  // Zürich
+  lat: 47.376570,
+  lon: 8.541208
+}
+
+var map = new maplibregl.Map({
+  center: [center.lon, center.lat],
+  zoom: 9,
+  container: 'my-map',
+  style: `https://maps.geoapify.com/v1/styles/positron/style.json?apiKey=${myAPIKey}`,
+});
+map.addControl(new maplibregl.NavigationControl());
+
+// Zürich Airport, we use https://api.geoapify.com/v1/icon/?type=awesome&color=%2372a2d4&size=x-large&icon=plane-departure&apiKey=6dc7fb95a3b246cfa0f3bcef5ce9ed9a icon, icon size: 47 x 69px, shadow adds: 6px
+// lat: 47.46101649104483, lon: 8.551922366826949
+var airportIcon = document.createElement('div');
+airportIcon.classList.add("airport");
+
+var airportPopup = new maplibregl.Popup({
+    anchor: 'bottom',
+    offset: [0, -64] // height - shadow
+  })
+  .setText('Zürich Airport');
+
+var airport = new maplibregl.Marker(airportIcon, {
+    anchor: 'bottom',
+    offset: [0, 6]
+  })
+  .setLngLat([8.551922366826949, 47.46101649104483])
+  .setPopup(airportPopup)
+  .addTo(map);
+
+// Zürich Main train station, we use https://api.geoapify.com/v1/icon/?type=awesome&color=%23e68d6f&size=large&icon=train&iconSize=large&apiKey=6dc7fb95a3b246cfa0f3bcef5ce9ed9a icon, icon size: 38 x 55px, shadow adds: 5px
+// lat: 47.378100800080745, lon: 8.5393635
+var trainStationIcon = document.createElement('div');
+trainStationIcon.style.width = '38px';
+trainStationIcon.style.height = '55px';
+// Explicitly set scaleFactor=2 in the call 
+// and backgroundSize=contain to get better 
+// Marker Icon quality with MapLibre GL
+trainStationIcon.style.backgroundSize = "contain";
+trainStationIcon.style.backgroundImage = "url(https://api.geoapify.com/v1/icon/?type=awesome&color=%23e68d6f&size=large&icon=train&iconSize=large&scaleFactor=2&apiKey=6dc7fb95a3b246cfa0f3bcef5ce9ed9a)";
+trainStationIcon.style.cursor = "pointer";
+
+var trainStationPopup = new maplibregl.Popup({
+      anchor: 'bottom',
+      offset: [0, -50]
+    }).setLngLat([8.5393635, 47.378100800080745])
+    .setText('Zürich Main train station');
+
+var trainStation = new maplibregl.Marker(trainStationIcon, {
+    anchor: 'bottom',
+    offset: [0, 5]
+  })
+  .setLngLat([8.5393635, 47.378100800080745])
+  .setPopup(trainStationPopup)
+  .addTo(map);
+  
+trainStationIcon.onclick = (event) => {
+  // you can add custom logic here. For example, modify popup.
+  trainStationPopup.setHTML('<a href = "google.com"> done </a>');
+}
+
+trainStationIcon.onmouseenter = () => trainStation.togglePopup();
+trainStationIcon.onmouseleave = () => trainStation.togglePopup();
+</script>
+</html>
